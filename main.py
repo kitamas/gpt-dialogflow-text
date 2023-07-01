@@ -53,11 +53,7 @@ def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    # ITT
-
     similar_questions = retrieve(query_text)
-
-    # ITT
 
     text = "webhook text response"
 
@@ -83,11 +79,12 @@ def retrieve(query):
     xq = res['data'][0]['embedding']
 
     # get relevant contexts
-    res = index.query(xq, top_k=3, include_metadata=True)
+    res = index.query(xq, top_k=1, include_metadata=True)
 
-    print("\nThe most similar questions:")
-    for match in res['matches']:
-        print(f"{match['score']:.2f}: {match['metadata']['text']}")
+    # print("\nThe most similar questions:")
+    #for match in res['matches']:
+    #    print(f"{match['score']:.2f}: {match['metadata']['text']}")
+    similar_questions = f"{match['metadata']['text']}"
 
 if __name__ == "__main__":
     app.run()
