@@ -24,14 +24,14 @@ def webhook():
     
 
     try:
-        if request.get_json(force=True) is None: # The variable
-        # if val is None: # The variable
+        if request.get_json(force=True) is None:
+            # if val is None: # The variable
             # print('It is None')
-    except NameError:
-        # print ("This variable is not defined")
-    else:
-        # print ("It is defined and has a value")
-        req = request.get_json(force=True)
+        except NameError:
+            # print ("This variable is not defined")
+        else:
+            # print ("It is defined and has a value")
+            req = request.get_json(force=True)
 
     res = {
         "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
