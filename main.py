@@ -2,8 +2,8 @@ import flask
 import json
 import os
 from flask import send_from_directory, request
-import openai
-import pinecone
+# import openai
+# import pinecone
 
 
 # Flask app should start in global layout
@@ -37,7 +37,7 @@ def webhook():
     intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
 
     # initializing a Pinecone index
-    # import pinecone
+    import pinecone
 
     # connect to pinecone environment
     pinecone.init(
