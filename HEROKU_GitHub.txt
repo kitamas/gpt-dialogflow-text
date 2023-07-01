@@ -1,0 +1,112 @@
+HEROKU
+https://www.heroku.com/
+kitamas25@gmail.com
+moodlevui25#
+
+mobil: salesforce authenticator, hot shelter
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+GitHub
+https://github.com
+kitamas25@gmail.com
+moodlevui25#
+We just sent your authentication code via email to kitamas25@gmail.com / moodlevui
+  user: kitamas
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+HEROKU - LOGIN
+
+RUN heroku CLI in cmd windows as ADMINISTRATOR
+C:\WINDOWS\system32>heroku login
+browser login + phone
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+HEROKU - LOG
+
+RUN heroku CLI in cmd windows as ADMINISTRATOR
+C:\WINDOWS\system32>heroku logs --tail --app cal-create
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+PUSH AN EXISTING REPOSITORY
+
+cmd windows as ADMINISTRATOR, local gép:
+cmd - E:\H2\Moodle_AI\dialogflow_cx\calendar_python\cal_create>
+
+git add .
+git commit -m "commit"
+git branch -M main
+git push -u origin main
+
+git push origin main --force (ha változtattam fájlt a GitHub on)
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+CREATE A NEW REPOSITORY ON THE COMMAND LINE
+
+git init -b main
+
+echo "# gpt-dialogflow" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/kitamas/gpt-dialogflow.git
+git push -u origin main
+
+# git remote add origin https://github.com/kitamas/[NAME].git
+
+git remote -v # Verifies the new remote URL
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+FLASK
+Prepare project, set as flask application:
+ - 'requirements.txt' with the depencies
+ - 'Procfile' to specify web server command
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+= = = GitHub - Heroku connection = = = GitHub - Heroku connection = = =
+= = = GitHub - Heroku connection = = = GitHub - Heroku connection = = =
+DEPLOY - HEROKU - Connect GitHub
+
+select the app
+  Deployment method - Connect to GitHub
+  Connect to GitHub: search for repository to connect to 
+  [Connect]
+
+Manual deploy - [Deploy branch]
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+NEM JO - heroku, git nem megy command ablakban
+E:\H2\Moodle_AI\dialogflow_cx\calendar_python\quickstart_G_Doc>
+
+Deploy your application
+Commit your code to the repository and deploy it to Heroku using Git.
+
+git add .
+git commit -am "make it better"
+git push heroku master
+
+You can now change your main deploy branch from "master" to "main" for both manual and automatic deploys, please follow the instructions here.
+Existing Git repository
+
+For existing repositories, simply add the heroku remote
+
+heroku git:remote -a quickstart-cal
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+HEROKU - APP
+https://kitamas.herokuapp.com/
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+HEROKU - CLI - INSTALL
+https://devcenter.heroku.com/articles/heroku-cli
+Download and install the Heroku CLI.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+API key
+AIzaSyBXBSDZdFkGtsTaC0gcyO3qM1RH1FL09eQ
+
+13b91977-c70d-4b84-9743-890ec9a15981
+If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+DB Browser for SQLite 
+https://sqlitebrowser.org/
+
+https://www.cleancss.com/python-beautify/
+
+https://jsonformatter.curiousconcept.com/#
+
+https://www.programcreek.com/
+
+
+
