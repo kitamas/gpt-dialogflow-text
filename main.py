@@ -56,7 +56,7 @@ def webhook():
     text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + text]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + similar_questions]}}]}
     }
 
     return res
