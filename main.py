@@ -21,9 +21,12 @@ def home():
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
     req = request.get_json(force=True)
-    print("req = ",req)
+    if req is None:
+        req = "req is None"
+    else:
+        req = "nem ures"
     text = "webhook text response"
-    print(text)
+
     res = {
         "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
     }
