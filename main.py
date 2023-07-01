@@ -23,7 +23,19 @@ def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    """
+    text = "webhook text response"
+
+    res = {
+        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + text]}}]}
+    }
+
+    return res
+
+if __name__ == "__main__":
+    app.run()
+#    app.debug = True
+
+"""
     if req is None:
         print("req is None.")
     else:
@@ -40,17 +52,4 @@ def webhook():
         req = None
         print("outrequest variable does not exist.")
 
-    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not         """
-
-
-    text = "webhook text response"
-
-    res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [text + query_text]}}]}
-    }
-
-    return res
-
-if __name__ == "__main__":
-    app.run()
-#    app.debug = True
+    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not     """
