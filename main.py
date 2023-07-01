@@ -2,8 +2,8 @@ import flask
 import json
 import os
 from flask import send_from_directory, request
-#import openai
-#import pinecone
+import openai
+import pinecone
 
 
 # Flask app should start in global layout
