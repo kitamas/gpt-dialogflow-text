@@ -21,15 +21,16 @@ def home():
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
     req = request.get_json(force=True)
-    # query_text = req.get('sessionInfo').get('parameters').get('query_text')
+    query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
+    """
     if req is None:
         print("req is None.")
     else:
         # Access req or perform operations
         print("req:", req)
 
-    """
+    
     try:
         req = request.get_json(force=True)
         # If the outrequest variable exists, the above line will assign its value to "req"
@@ -45,7 +46,7 @@ def webhook():
     text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [text + query_text]}}]}
     }
 
     return res
