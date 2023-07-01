@@ -2,8 +2,8 @@ import flask
 import json
 import os
 from flask import send_from_directory, request
-import openai
-import pinecone
+#import openai
+#import pinecone
 
 
 # Flask app should start in global layout
@@ -21,13 +21,11 @@ def home():
     return "Hello World"
 
 
-
-
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
 
     # Set your "OPENAI_API_KEY" Environment Variable in Heroku
-    # import openai
+    import openai
 
     openai.api_key = os.environ["OPENAI_API_KEY"]
     # openai.api_key = os.environ.get["OPENAI_API_KEY"]
