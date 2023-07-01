@@ -1,4 +1,4 @@
 # ortools==9.0.9048
 flask==2.0.1
 gunicorn==20.1.0
-openai==
+openai==0.27.8
