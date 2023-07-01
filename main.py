@@ -66,13 +66,13 @@ def webhook():
 
 embed_model = "text-embedding-ada-002"
 
-def retrieve(query):
+def retrieve(query_text):
     index_name = "chat-doc-ts"
 
     index = pinecone.Index(index_name)
 
     res = openai.Embedding.create(
-        input=[query],
+        input=[query_text],
         engine=embed_model
     )
     # retrieve from Pinecone
@@ -81,10 +81,13 @@ def retrieve(query):
     # get relevant contexts
     res = index.query(xq, top_k=1, include_metadata=True)
 
-    # print("\nThe most similar questions:")
+    print("\nThe most similar questions:")
     for match in res['matches']:
     #    print(f"{match['score']:.2f}: {match['metadata']['text']}")
          similar_questions = match['metadata']['text']
+
+    print("\nThe most similar questions:", similar_questions)    
+    return similar_questions
 
 if __name__ == "__main__":
     app.run()
