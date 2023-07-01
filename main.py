@@ -25,7 +25,7 @@ def webhook():
 
 
     try:
-        req = outrequest
+        req = request.get_json(force=True)
         # If the outrequest variable exists, the above line will assign its value to "req"
         # You can use "req" further in your code
     except NameError:
