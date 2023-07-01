@@ -23,7 +23,7 @@ def webhook():
     text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [req + text]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [req]}}]}
     }
 
     return res
