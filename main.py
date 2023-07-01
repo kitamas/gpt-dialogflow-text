@@ -25,6 +25,7 @@ def webhook():
         req = "req is None"
     else:
         req = "nem ures"
+    print(req)
     text = "webhook text response"
 
     res = {
