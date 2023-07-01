@@ -33,11 +33,9 @@ def webhook():
         req = None
         print("outrequest variable does not exist.")
 
-# Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not defined
+    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not defined
 
 
-
-    """
     text = "webhook text response"
 
     res = {
@@ -45,7 +43,7 @@ def webhook():
     }
 
     return res
-    """
+
 if __name__ == "__main__":
     app.run()
 #    app.debug = True
