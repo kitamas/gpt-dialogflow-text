@@ -20,7 +20,8 @@ def home():
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
-    if request.get_json(force=True) != None:
+    req = request.get_json(force=True)
+    if req != None:
         req = request.get_json(force=True)
     else:
         req = "req"
