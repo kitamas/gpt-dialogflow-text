@@ -71,6 +71,10 @@ def webhook():
 embed_model = "text-embedding-ada-002"
 
 def retrieve(query):
+    index_name = "chat-doc-ts"
+
+    index = pinecone.Index(index_name)
+
     res = openai.Embedding.create(
         input=[query],
         engine=embed_model
