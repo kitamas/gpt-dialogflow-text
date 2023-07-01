@@ -68,6 +68,8 @@ def webhook():
     return res
 
 
+embed_model = "text-embedding-ada-002"
+
 def retrieve(query):
     res = openai.Embedding.create(
         input=[query],
