@@ -84,7 +84,7 @@ def retrieve(query):
     # print("\nThe most similar questions:")
     for match in res['matches']:
     #    print(f"{match['score']:.2f}: {match['metadata']['text']}")
-         similar_questions = f"{match['metadata']['text']}"
+         similar_questions = match['metadata']['text']
 
 if __name__ == "__main__":
     app.run()
