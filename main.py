@@ -32,7 +32,7 @@ def webhook():
     # openai.api_key = os.getenv("OPENAI_API_KEY")
 
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
-    environment = os.environ['YOUR_ENV']
+    YOUR_ENV = os.environ['YOUR_ENV']
 
     intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
 
