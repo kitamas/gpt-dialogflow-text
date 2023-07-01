@@ -21,15 +21,15 @@ def home():
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
     req = request.get_json(force=True)
-    query_text = req.get('sessionInfo').get('parameters').get('query_text')
+    # query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    """
+
     if req is None:
         req = "req is None"
     else:
         req = "nem ures"
     print(req)
-    """
+
     text = "webhook text response"
 
     res = {
