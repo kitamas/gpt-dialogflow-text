@@ -3,6 +3,17 @@ import json
 import os
 from flask import send_from_directory, request
 
+# Set your "OPENAI_API_KEY" Environment Variable in Heroku
+import openai
+openai.api_key = os.environ["OPENAI_API_KEY"]
+# openai.api_key = os.environ.get["OPENAI_API_KEY"]
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+
+PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
+environment = os.environ['YOUR_ENV']
+
+intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+
 # Flask app should start in global layout
 app = flask.Flask(__name__)
 
@@ -17,11 +28,30 @@ def favicon():
 def home():
     return "Hello World"
 
+# initializing a Pinecone index
+import pinecone
+
+# connect to pinecone environment
+pinecone.init(
+    api_key=PINECONE_API_KEY,
+    environment=YOUR_ENV
+)
+
+index_name = "chat-doc-ts"
+
+index = pinecone.Index(index_name)
+
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
+
+    # ITT
+
+    similar_questions = retrieve(query_text)
+
+    # ITT
 
     text = "webhook text response"
 
@@ -31,9 +61,27 @@ def webhook():
 
     return res
 
+
+def retrieve(query):
+    res = openai.Embedding.create(
+        input=[query],
+        engine=embed_model
+    )
+    # retrieve from Pinecone
+    xq = res['data'][0]['embedding']
+
+    # get relevant contexts
+    res = index.query(xq, top_k=3, include_metadata=True)
+
+    print("\nThe most similar questions:")
+    for match in res['matches']:
+        print(f"{match['score']:.2f}: {match['metadata']['text']}")
+
 if __name__ == "__main__":
     app.run()
 #    app.debug = True
+
+
 
 """
     if req is None:
