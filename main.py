@@ -17,13 +17,14 @@ def favicon():
 def home():
     return "Hello World"
 
+req = ""
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
     req = request.get_json(force=True)
     text = "webhook text response"
-
+    text = req+text
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [req]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
     }
 
     return res
