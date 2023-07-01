@@ -19,18 +19,7 @@ def favicon():
 def home():
     return "Hello World"
 
-# initializing a Pinecone index
-import pinecone
 
-# connect to pinecone environment
-pinecone.init(
-    api_key=PINECONE_API_KEY,
-    environment=YOUR_ENV
-)
-
-index_name = "chat-doc-ts"
-
-index = pinecone.Index(index_name)
 
 
 @app.route('/webhook', methods=['GET','POST'])
@@ -46,6 +35,20 @@ def webhook():
     environment = os.environ['YOUR_ENV']
 
     intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+
+    # initializing a Pinecone index
+    import pinecone
+
+    # connect to pinecone environment
+    pinecone.init(
+        api_key=PINECONE_API_KEY,
+        environment=YOUR_ENV
+    )
+
+    index_name = "chat-doc-ts"
+
+    index = pinecone.Index(index_name)
+
 
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
