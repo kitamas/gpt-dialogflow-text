@@ -20,10 +20,16 @@ def home():
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
-    # req = request.get_json(force=True)
+    req = request.get_json(force=True)
     # query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
+    if req is None:
+        print("req is None.")
+    else:
+        # Access req or perform operations
+        print("req:", req)
 
+    """
     try:
         req = request.get_json(force=True)
         # If the outrequest variable exists, the above line will assign its value to "req"
@@ -33,7 +39,7 @@ def webhook():
         req = None
         print("outrequest variable does not exist.")
 
-    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not defined
+    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not         """
 
 
     text = "webhook text response"
