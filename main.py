@@ -19,19 +19,15 @@ def home():
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
-    #req = request.get_json(force=True)
+    req = request.get_json(force=True)
     text = "webhook text response"
 
-    #return {
-    #    "fulfillmentText": "webhook text response"
-    #}
-
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [text]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [req + text]}}]}
     }
 
     return res
 
 if __name__ == "__main__":
-#    app.debug = True
     app.run()
+#    app.debug = True
