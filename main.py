@@ -3,16 +3,7 @@ import json
 import os
 from flask import send_from_directory, request
 
-# Set your "OPENAI_API_KEY" Environment Variable in Heroku
-import openai
-openai.api_key = os.environ["OPENAI_API_KEY"]
-# openai.api_key = os.environ.get["OPENAI_API_KEY"]
-# openai.api_key = os.getenv("OPENAI_API_KEY")
 
-PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
-environment = os.environ['YOUR_ENV']
-
-intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
 
 # Flask app should start in global layout
 app = flask.Flask(__name__)
@@ -44,6 +35,18 @@ index = pinecone.Index(index_name)
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
+
+    # Set your "OPENAI_API_KEY" Environment Variable in Heroku
+    import openai
+    openai.api_key = os.environ["OPENAI_API_KEY"]
+    # openai.api_key = os.environ.get["OPENAI_API_KEY"]
+    # openai.api_key = os.getenv("OPENAI_API_KEY")
+
+    PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
+    environment = os.environ['YOUR_ENV']
+
+    intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
