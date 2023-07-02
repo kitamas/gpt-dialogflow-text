@@ -65,12 +65,14 @@ def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    prompt = retrieve(query_text)
+
+    query_with_contexts = retrieve(query_text)
+    answer = complete(query_with_contexts)
 
     text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + prompt]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [query_text + "COMP: " + answer]}}]}
     }
 
     return res
