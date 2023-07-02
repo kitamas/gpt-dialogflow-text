@@ -25,7 +25,7 @@ def complete(prompt):
         engine='text-davinci-003',
         prompt=prompt,
         temperature=0,
-        max_tokens=300,
+        max_tokens=100,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -73,7 +73,7 @@ def webhook():
     # text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [query_text + "COMP: " + answer]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [answer]}}]}
     }
 
     return res
@@ -107,7 +107,9 @@ def retrieve(query_text):
         x['metadata']['text'] for x in res['matches']
     ]
 
-    limit = 3750
+    # limit = 3750 TIMEOUT ??
+    limit = 750
+
     # build our prompt with the retrieved contexts included
     prompt_start = (
         "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
