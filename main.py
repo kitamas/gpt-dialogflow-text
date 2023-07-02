@@ -49,7 +49,6 @@ def webhook():
 
     index = pinecone.Index(index_name)
 
-
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
@@ -79,15 +78,21 @@ def retrieve(query_text):
     xq = res['data'][0]['embedding']
 
     # get relevant contexts
-    res = index.query(xq, top_k=1, include_metadata=True)
+    res = index.query(xq, top_k=3, include_metadata=True)
 
     print("\nThe most similar questions:")
     for match in res['matches']:
     #    print(f"{match['score']:.2f}: {match['metadata']['text']}")
          similar_questions = match['metadata']['text']
 
-    print("\nThe most similar questions:", similar_questions)    
-    return similar_questions
+    contexts = [
+        x['metadata']['text'] for x in res['matches']
+    ]
+
+    #print("\nThe most similar questions:", similar_questions)    
+    #return similar_questions
+    print("\ncontexts:", contexts)    
+    return contexts
 
 if __name__ == "__main__":
     app.run()
