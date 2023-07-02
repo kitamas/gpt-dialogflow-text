@@ -97,8 +97,8 @@ def retrieve(query_text):
         "Context:\n"
     )
     prompt_end = (
-        #f"\n\nQuestion: {query}\nAnswer:"
-        f"\n\nUser: {query}"
+        #f"\n\nQuestion: {query_text}\nAnswer:"
+        f"\n\nUser: {query_text}"
     )
     # append contexts until hitting limit
     for i in range(1, len(contexts)):
