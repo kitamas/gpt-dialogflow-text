@@ -67,7 +67,7 @@ def webhook():
 
 
     query_with_contexts = retrieve(query_text)
-    print("query_with_contexts =")
+    print("query_with_contexts =",query_with_contexts)
     answer = complete(query_with_contexts)
     print("answer =",answer)
     # text = "webhook text response"
@@ -132,7 +132,7 @@ def retrieve(query_text):
                 "\n= = =\n".join(contexts) +
                 prompt_end
             )
-    print("PROMPT ",prompt)
+
     return prompt
 
 
