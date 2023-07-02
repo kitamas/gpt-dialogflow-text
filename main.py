@@ -91,6 +91,7 @@ def retrieve(query_text):
         x['metadata']['text'] for x in res['matches']
     ]
 
+    limit = 3750
     # build our prompt with the retrieved contexts included
     prompt_start = (
         "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
@@ -120,7 +121,7 @@ def retrieve(query_text):
 
 
 if __name__ == "__main__":
-    limit = 3750
+
     app.run()
 #    app.debug = True
 
