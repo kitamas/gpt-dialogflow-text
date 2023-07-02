@@ -52,7 +52,7 @@ def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    similar_questions = retrieve(query_text)
+    contexts = retrieve(query_text)
 
     text = "webhook text response"
 
@@ -93,8 +93,7 @@ def retrieve(query_text):
     #return similar_questions
 
     print("\ncontexts:", contexts)    
-    similar_questions = contexts
-    return similar_questions
+    return contexts
 
 if __name__ == "__main__":
     app.run()
