@@ -67,9 +67,9 @@ def webhook():
 
 
     query_with_contexts = retrieve(query_text)
-    print("query_with_contexts =",query_with_contexts)
+
     answer = complete(query_with_contexts)
-    print("answer =",answer)
+    print("ANSWER =",answer)
     # text = "webhook text response"
 
     res = {
@@ -110,7 +110,7 @@ def retrieve(query_text):
     limit = 3750
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+        "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
         "Context:\n"
     )
     prompt_end = (
