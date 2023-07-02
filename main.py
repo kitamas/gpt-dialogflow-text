@@ -52,12 +52,12 @@ def webhook():
     req = request.get_json(force=True)
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
-    contexts = retrieve(query_text)
+    prompt = retrieve(query_text)
 
     text = "webhook text response"
 
     res = {
-        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + contexts]}}]}
+        "fulfillment_response": {"messages": [{"text": {"text": [query_text + " " + prompt]}}]}
     }
 
     return res
@@ -80,22 +80,47 @@ def retrieve(query_text):
     # get relevant contexts
     res = index.query(xq, top_k=3, include_metadata=True)
 
+    """
     print("\nThe most similar questions:")
     for match in res['matches']:
     #    print(f"{match['score']:.2f}: {match['metadata']['text']}")
          similar_questions = match['metadata']['text']
+    """
 
     contexts = [
         x['metadata']['text'] for x in res['matches']
     ]
 
-    #print("\nThe most similar questions:", similar_questions)    
-    #return similar_questions
+    # build our prompt with the retrieved contexts included
+    prompt_start = (
+        "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+        "Context:\n"
+    )
+    prompt_end = (
+        #f"\n\nQuestion: {query}\nAnswer:"
+        f"\n\nUser: {query}"
+    )
+    # append contexts until hitting limit
+    for i in range(1, len(contexts)):
+        if len("\n\n---\n\n".join(contexts[:i])) >= limit:
+            prompt = (
+                prompt_start +
+                "\n---\n".join(contexts[:i-1]) +
+                prompt_end
+            )
+            break
+        elif i == len(contexts)-1:
+            prompt = (
+                prompt_start +
+                "\n= = =\n".join(contexts) +
+                prompt_end
+            )
 
-    print("\ncontexts:", contexts)    
-    return contexts
+    return prompt
+
 
 if __name__ == "__main__":
+    limit = 3750
     app.run()
 #    app.debug = True
 
