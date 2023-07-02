@@ -20,6 +20,19 @@ def favicon():
 def home():
     return "Hello World"
 
+def complete(prompt):
+    res = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        temperature=0,
+        max_tokens=300,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None
+    )
+    return res['choices'][0]['text'].strip()
+
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
@@ -116,7 +129,7 @@ def retrieve(query_text):
                 "\n= = =\n".join(contexts) +
                 prompt_end
             )
-
+    print("PROMPT ",prompt)
     return prompt
 
 
