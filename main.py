@@ -91,8 +91,10 @@ def retrieve(query_text):
 
     #print("\nThe most similar questions:", similar_questions)    
     #return similar_questions
+
     print("\ncontexts:", contexts)    
-    return contexts
+    similar_questions = contexts
+    return similar_questions
 
 if __name__ == "__main__":
     app.run()
