@@ -21,10 +21,24 @@ def home():
     return "Hello World"
 
 def complete(prompt):
+    # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
+    messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
+
+    res = openai.ChatCompletion.create(
+    model = "gpt-3.5-turbo",
+    messages = messages,
+    temperature = 0.5,
+    max_tokens = 200
+    )
+
+    return res["choices"][0]["message"]["content"]
+
+"""
+def complete(prompt):
     res = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        temperature=0,
+        temperature=0.5,
         max_tokens=200,
         top_p=1,
         frequency_penalty=0,
@@ -32,17 +46,13 @@ def complete(prompt):
         stop=None
     )
     return res['choices'][0]['text'].strip()
-
+"""
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
 
     # Set your "OPENAI_API_KEY" Environment Variable in Heroku
-    # import openai
-
     openai.api_key = os.environ["OPENAI_API_KEY"]
-    # openai.api_key = os.environ.get["OPENAI_API_KEY"]
-    # openai.api_key = os.getenv("OPENAI_API_KEY")
 
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
     YOUR_ENV = os.environ['YOUR_ENV']
@@ -50,9 +60,6 @@ def webhook():
     intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
 
     # initializing a Pinecone index
-    # import pinecone
-
-    # connect to pinecone environment
     pinecone.init(
         api_key=PINECONE_API_KEY,
         environment=YOUR_ENV
@@ -63,14 +70,13 @@ def webhook():
     index = pinecone.Index(index_name)
 
     req = request.get_json(force=True)
-    query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
+    query_text = req.get('sessionInfo').get('parameters').get('query_text')
 
     query_with_contexts = retrieve(query_text)
 
     answer = complete(query_with_contexts)
     print("ANSWER =",answer)
-    # text = "webhook text response"
 
     res = {
         "fulfillment_response": {"messages": [{"text": {"text": [answer]}}]}
@@ -142,24 +148,3 @@ if __name__ == "__main__":
 
     app.run()
 #    app.debug = True
-
-
-
-"""
-    if req is None:
-        print("req is None.")
-    else:
-        # Access req or perform operations
-        print("req:", req)
-
-    
-    try:
-        req = request.get_json(force=True)
-        # If the outrequest variable exists, the above line will assign its value to "req"
-        # You can use "req" further in your code
-    except NameError:
-        # Handle the case when outrequest variable does not exist
-        req = None
-        print("outrequest variable does not exist.")
-
-    # Now you can use "req" safely knowing that it is either assigned the value of "outrequest" or "None" if it was not     """
