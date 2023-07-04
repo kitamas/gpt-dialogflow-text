@@ -19,7 +19,7 @@ def favicon():
 @app.route('/home')
 def home():
     return "Hello World"
-
+"""
 def complete(prompt):
     # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
     messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
@@ -47,7 +47,7 @@ def complete(prompt):
         stop=None
     )
     return res['choices'][0]['text'].strip()
-"""
+
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
