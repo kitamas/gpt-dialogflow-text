@@ -114,9 +114,9 @@ def retrieve(query_text):
     contexts = [
         x['metadata']['text'] for x in res['matches']
     ]
-
+    print("contexts = ",contexts)
     # limit = 3750 TIMEOUT ??
-    limit = 750
+    limit = 3750
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
