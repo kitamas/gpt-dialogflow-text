@@ -39,7 +39,8 @@ def complete(prompt):
     res = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        temperature=0.5,
+        print("PROMPT = ",prompt)
+        temperature=0.2,
         max_tokens=200,
         top_p=1,
         frequency_penalty=0,
@@ -74,11 +75,10 @@ def webhook():
     req = request.get_json(force=True)
 
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
-    print("query_text = ",query_text)
+
     query_with_contexts = retrieve(query_text)
-    print("query_with_contexts = ",query_with_contexts)
+
     answer = complete(query_with_contexts)
-    print("ANSWER =",answer)
 
     res = {
         "fulfillment_response": {"messages": [{"text": {"text": [answer]}}]}
