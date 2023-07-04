@@ -103,7 +103,7 @@ def retrieve(query_text):
 
     # get relevant contexts
     # res = index.query(xq, top_k=3, include_metadata=True)
-    res = index.query(xq, top_k=1, include_metadata=True)
+    res = index.query(xq, top_k=2, include_metadata=True)
 
     """
     print("\nThe most similar questions:")
