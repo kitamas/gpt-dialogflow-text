@@ -121,8 +121,8 @@ def retrieve(query_text):
     # build our prompt with the retrieved contexts included
     prompt_start = (
         # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
-        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. "
-        "Context:\n"
+        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
+        # "Context:\n"
     )
     prompt_end = (
         #f"\n\nQuestion: {query_text}\nAnswer:"
