@@ -116,12 +116,12 @@ def retrieve(query_text):
     ]
     # print("CONTEXTS = ",contexts)
     # limit = 3750 TIMEOUT ??
-    limit = 3750
+    limit = 750
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
         # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
-        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
+        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. "
         "Context:\n"
     )
     prompt_end = (
