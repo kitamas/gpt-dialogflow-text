@@ -22,7 +22,8 @@ def home():
 
 def complete(prompt):
     # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
-    messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
@@ -57,7 +58,8 @@ def webhook():
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
     YOUR_ENV = os.environ['YOUR_ENV']
 
-    intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+    # intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
+    intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
 
     # initializing a Pinecone index
     pinecone.init(
@@ -118,7 +120,8 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
+        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
+        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
         "Context:\n"
     )
     prompt_end = (
