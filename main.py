@@ -102,7 +102,8 @@ def retrieve(query_text):
     xq = res['data'][0]['embedding']
 
     # get relevant contexts
-    res = index.query(xq, top_k=3, include_metadata=True)
+    # res = index.query(xq, top_k=3, include_metadata=True)
+    res = index.query(xq, top_k=1, include_metadata=True)
 
     """
     print("\nThe most similar questions:")
@@ -116,7 +117,7 @@ def retrieve(query_text):
     ]
     # print("CONTEXTS = ",contexts)
     # limit = 3750 TIMEOUT ??
-    limit = 2750
+    limit = 750
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
