@@ -74,9 +74,9 @@ def webhook():
     req = request.get_json(force=True)
 
     query_text = req.get('sessionInfo').get('parameters').get('query_text')
-
+    print("query_text = ",query_text)
     query_with_contexts = retrieve(query_text)
-
+    print("query_with_contexts = ",query_with_contexts)
     answer = complete(query_with_contexts)
     print("ANSWER =",answer)
 
@@ -114,7 +114,7 @@ def retrieve(query_text):
     contexts = [
         x['metadata']['text'] for x in res['matches']
     ]
-    print("contexts = ",contexts)
+    # print("CONTEXTS = ",contexts)
     # limit = 3750 TIMEOUT ??
     limit = 3750
 
@@ -143,7 +143,7 @@ def retrieve(query_text):
                 "\n= = =\n".join(contexts) +
                 prompt_end
             )
-    print("PROMPT = ",prompt)
+    print("PROMPT IN RETRIEVE = ",prompt)
     return prompt
 
 
