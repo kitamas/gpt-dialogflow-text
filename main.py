@@ -28,7 +28,7 @@ def complete(prompt):
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     messages = messages,
-    temperature = 0.2,
+    temperature = 0.1,
     max_tokens = 200
     )
 
@@ -59,7 +59,7 @@ def webhook():
     YOUR_ENV = os.environ['YOUR_ENV']
 
     # intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
-    intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
+    # intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
 
     # initializing a Pinecone index
     pinecone.init(
@@ -143,7 +143,7 @@ def retrieve(query_text):
                 "\n= = =\n".join(contexts) +
                 prompt_end
             )
-
+    print("PROMPT = ",prompt)
     return prompt
 
 
