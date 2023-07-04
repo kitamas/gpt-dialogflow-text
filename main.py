@@ -116,7 +116,7 @@ def retrieve(query_text):
     ]
     # print("CONTEXTS = ",contexts)
     # limit = 3750 TIMEOUT ??
-    limit = 750
+    limit = 1750
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
