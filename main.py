@@ -41,7 +41,7 @@ def complete(prompt):
         engine='text-davinci-003',
         prompt=prompt,
         temperature=0.2,
-        max_tokens=200,
+        max_tokens=250,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -144,7 +144,7 @@ def retrieve(query_text):
                 "\n= = =\n".join(contexts) +
                 prompt_end
             )
-    print("PROMPT IN RETRIEVE = ",prompt)
+    # print("PROMPT IN RETRIEVE = ",prompt)
     return prompt
 
 
