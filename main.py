@@ -36,10 +36,10 @@ def complete(prompt):
 
 """
 def complete(prompt):
+    print("PROMPT = ",prompt)
     res = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        print("PROMPT = ",prompt)
         temperature=0.2,
         max_tokens=200,
         top_p=1,
