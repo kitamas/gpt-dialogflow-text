@@ -5,7 +5,6 @@ from flask import send_from_directory, request
 import openai
 import pinecone
 
-
 # Flask app should start in global layout
 app = flask.Flask(__name__)
 
@@ -33,6 +32,8 @@ def complete(prompt):
     )
 
     return res["choices"][0]["message"]["content"]
+
+# stop=["\n"],
 
 """
 def complete(prompt):
