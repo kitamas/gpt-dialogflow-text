@@ -60,8 +60,6 @@ def webhook():
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
     YOUR_ENV = os.environ['YOUR_ENV']
 
-    namespace_name = "infmuz"
-
     # intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
     # intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
 
@@ -91,6 +89,7 @@ def webhook():
 
 
 embed_model = "text-embedding-ada-002"
+
 namespace_name = "infmuz"
 
 def retrieve(query_text):
