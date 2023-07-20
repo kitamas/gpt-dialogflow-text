@@ -91,6 +91,7 @@ def webhook():
 
 
 embed_model = "text-embedding-ada-002"
+namespace_name = "infmuz"
 
 def retrieve(query_text):
     index_name = "chat-doc-ts"
