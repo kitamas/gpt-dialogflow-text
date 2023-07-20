@@ -60,6 +60,8 @@ def webhook():
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
     YOUR_ENV = os.environ['YOUR_ENV']
 
+    namespace_name = "infmuz"
+
     # intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
     # intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
 
@@ -104,7 +106,8 @@ def retrieve(query_text):
 
     # get relevant contexts
     # res = index.query(xq, top_k=3, include_metadata=True)
-    res = index.query(xq, top_k=2, include_metadata=True)
+    # res = index.query(xq, top_k=2, include_metadata=True)
+    res = index.query(xq, top_k=2, include_metadata=True,namespace=namespace_name)
 
     """
     print("\nThe most similar questions:")
