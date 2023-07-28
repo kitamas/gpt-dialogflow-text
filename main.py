@@ -71,6 +71,8 @@ def webhook():
     )
 
     index_name = "chat-doc-ts"
+
+    namespace_name = "infmuz"
     
     index = pinecone.Index(index_name)
 
