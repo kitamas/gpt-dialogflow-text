@@ -72,6 +72,8 @@ def webhook():
 
     index_name = "chat-doc-ts"
 
+    namespace_name = "mb"
+    
     index = pinecone.Index(index_name)
 
     req = request.get_json(force=True)
