@@ -109,7 +109,7 @@ def retrieve(query_text):
     # get relevant contexts
     # res = index.query(xq, top_k=3, include_metadata=True)
     # res = index.query(xq, top_k=2, include_metadata=True)
-    res = index.query(xq, top_k=2, include_metadata=True,namespace=namespace_name)
+    res = index.query(xq, top_k=1, include_metadata=True,namespace=namespace_name)
 
     """
     print("\nThe most similar questions:")
@@ -118,8 +118,16 @@ def retrieve(query_text):
          similar_questions = match['metadata']['text']
     """
 
+
+    """ INFMUZ - TEXT
     contexts = [
         x['metadata']['text'] for x in res['matches']
+    ]
+    """
+
+    # MAGICBOOK
+    contexts = [
+        x['metadata']['div'] for x in res['matches']
     ]
 
     # limit = 3750 TIMEOUT ??
