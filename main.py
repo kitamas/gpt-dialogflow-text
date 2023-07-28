@@ -24,11 +24,10 @@ def complete(prompt):
     messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
     # messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
 
-
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     messages = messages,
-    temperature = 0.5,
+    temperature = 0.2,
     max_tokens = 200
     )
 
@@ -72,8 +71,6 @@ def webhook():
 
     index_name = "chat-doc-ts"
 
-    namespace_name = "infmuz"
-    
     index = pinecone.Index(index_name)
 
     req = request.get_json(force=True)
@@ -110,7 +107,7 @@ def retrieve(query_text):
     # get relevant contexts
     # res = index.query(xq, top_k=3, include_metadata=True)
     # res = index.query(xq, top_k=2, include_metadata=True)
-    res = index.query(xq, top_k=1, include_metadata=True,namespace=namespace_name)
+    res = index.query(xq, top_k=2, include_metadata=True,namespace=namespace_name)
 
     """
     print("\nThe most similar questions:")
@@ -128,7 +125,7 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. Context: "
+        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
         "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
         # "Context:\n"
     )
