@@ -27,7 +27,7 @@ def complete(prompt):
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     messages = messages,
-    temperature = 0.2,
+    temperature = 0.5,
     max_tokens = 200
     )
 
@@ -90,7 +90,8 @@ def webhook():
 
 embed_model = "text-embedding-ada-002"
 
-namespace_name = "infmuz"
+# namespace_name = "infmuz"
+namespace_name = "mb"
 
 def retrieve(query_text):
     index_name = "chat-doc-ts"
@@ -125,8 +126,9 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
-        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
+        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. Context: "
+        # "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
+        "Telekom, MagicBook, belső, hivatalos dokumentum. Válaszolj a Telekom dolgozóknak a következő context alapján. Context: "
         # "Context:\n"
     )
     prompt_end = (
