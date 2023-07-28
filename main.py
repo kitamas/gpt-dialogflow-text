@@ -21,9 +21,9 @@ def home():
 
 def complete(prompt):
     # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
-    # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
     # messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
-    messages = [{"role": "system", "content": "Telekom, MagicBook, belső, hivatalos dokumentum. Válaszolj a Telekom dolgozóknak a következő context alapján. Context:"}, {"role": "user", "content": prompt}]
+
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
@@ -71,8 +71,6 @@ def webhook():
     )
 
     index_name = "chat-doc-ts"
-
-    namespace_name = "mb"
     
     index = pinecone.Index(index_name)
 
@@ -93,8 +91,7 @@ def webhook():
 
 embed_model = "text-embedding-ada-002"
 
-# namespace_name = "infmuz"
-namespace_name = "mb"
+namespace_name = "infmuz"
 
 def retrieve(query_text):
     index_name = "chat-doc-ts"
@@ -122,16 +119,8 @@ def retrieve(query_text):
          similar_questions = match['metadata']['text']
     """
 
-
-    """ INFMUZ - TEXT
     contexts = [
         x['metadata']['text'] for x in res['matches']
-    ]
-    """
-
-    # MAGICBOOK
-    contexts = [
-        x['metadata']['div'] for x in res['matches']
     ]
 
     # limit = 3750 TIMEOUT ??
@@ -140,8 +129,7 @@ def retrieve(query_text):
     # build our prompt with the retrieved contexts included
     prompt_start = (
         # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. Context: "
-        # "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
-        "Telekom, MagicBook, belső, hivatalos dokumentum. Válaszolj a Telekom dolgozóknak a következő context alapján. Context: "
+        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
         # "Context:\n"
     )
     prompt_end = (
