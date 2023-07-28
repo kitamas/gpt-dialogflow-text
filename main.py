@@ -79,7 +79,8 @@ def webhook():
 
     query_with_contexts = retrieve(query_text)
 
-    answer = complete(query_with_contexts)
+    #answer = complete(query_with_contexts)
+    answer = "ANSWER"
 
     res = {
         "fulfillment_response": {"messages": [{"text": {"text": [answer]}}]}
