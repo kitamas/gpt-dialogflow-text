@@ -21,8 +21,9 @@ def home():
 
 def complete(prompt):
     # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
-    messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
     # messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Telekom, MagicBook, belső, hivatalos dokumentum. Válaszolj a Telekom dolgozóknak a következő context alapján. Context:"}, {"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
