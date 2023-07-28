@@ -96,8 +96,6 @@ namespace_name = "infmuz"
 def retrieve(query_text):
     index_name = "chat-doc-ts"
 
-    namespace_name = "mb"
-
     index = pinecone.Index(index_name)
 
     res = openai.Embedding.create(
