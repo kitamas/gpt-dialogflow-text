@@ -53,22 +53,6 @@ def complete(prompt):
 
 # stop=["\n"],
 
-"""
-def complete(prompt):
-    # print("PROMPT = ",prompt)
-    res = openai.Completion.create(
-        engine='text-davinci-003',
-        prompt=prompt,
-        temperature=0.5,
-        max_tokens=400,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=None
-    )
-    return res['choices'][0]['text'].strip()
-"""
-
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
 
@@ -109,7 +93,7 @@ embed_model = "text-embedding-ada-002"
 namespace_name = "kando"
 
 def retrieve(query_text):
-    index_name = "chat-doc-ts"
+    index_name = "chat-doc-mt"
 
     index = pinecone.Index(index_name)
 
