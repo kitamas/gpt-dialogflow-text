@@ -84,7 +84,7 @@ def webhook():
         environment=YOUR_ENV
     )
 
-    index_name = "chat-doc-ts"
+    index_name = "chat-doc-mt"
 
     index = pinecone.Index(index_name)
 
