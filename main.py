@@ -5,6 +5,25 @@ from flask import send_from_directory, request
 import openai
 import pinecone
 
+# Heroku config vars
+openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = "sk- . . ."
+
+# Heroku config vars
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+# TELEKOM PINECONE_API_KEY = "c47d17e1-62da-4f4a-a319-9608e3104d13"
+# PINECONE_API_KEY = "a2a86279-ffc8-490c-9365-0d3d32a458a5"
+
+# Heroku config vars
+YOUR_ENV = os.getenv("YOUR_ENV")
+# TELEKOM YOUR_ENV = "us-west1-gcp-free"
+# YOUR_ENV = "us-west4-gcp"
+
+index_name = "chat-doc-mt"
+
+# namespace = "infmuz"
+namespace = "kando"
+
 # Flask app should start in global layout
 app = flask.Flask(__name__)
 
@@ -20,15 +39,14 @@ def home():
     return "Hello World"
 
 def complete(prompt):
-    # messages = [{"role": "system", "content": "You are a kind helpful assistant."},]
-    messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
-    # messages = [{"role": "system", "content": "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel."}, {"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     messages = messages,
-    temperature = 0.2,
-    max_tokens = 200
+    temperature = 0.5,
+    max_tokens = 500
     )
 
     return res["choices"][0]["message"]["content"]
@@ -41,8 +59,8 @@ def complete(prompt):
     res = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        temperature=0.2,
-        max_tokens=250,
+        temperature=0.5,
+        max_tokens=400,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -59,9 +77,6 @@ def webhook():
 
     PINECONE_API_KEY = os.environ['PINECONE_API_KEY']
     YOUR_ENV = os.environ['YOUR_ENV']
-
-    # intro_text = "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján."
-    # intro_text = "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."
 
     # initializing a Pinecone index
     pinecone.init(
@@ -90,7 +105,8 @@ def webhook():
 
 embed_model = "text-embedding-ada-002"
 
-namespace_name = "infmuz"
+# namespace_name = "infmuz"
+namespace_name = "kando"
 
 def retrieve(query_text):
     index_name = "chat-doc-ts"
@@ -125,8 +141,8 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        # "Egy Telekom ügyfélszolgálatos asszisztens beszélget az ügyfelekkel. Válaszolj a kérdésekre a következő context alapján. "
-        "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
+        "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal és válaszol a következő context alapján. Context: "
+        # "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
         # "Context:\n"
     )
     prompt_end = (
