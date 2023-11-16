@@ -22,7 +22,8 @@ YOUR_ENV = os.getenv("YOUR_ENV")
 index_name = "chat-doc-mt"
 
 # namespace = "infmuz"
-namespace = "kando"
+# namespace = "kando"
+namespace = "kumamoto"
 
 # Flask app should start in global layout
 app = flask.Flask(__name__)
@@ -39,8 +40,9 @@ def home():
     return "Hello World"
 
 def complete(prompt):
-    messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
     # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Kumamoto University. The assistant answer the questions of students based on the prompt."},{"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
@@ -125,7 +127,8 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal és válaszol a következő context alapján. Context: "
+        "Kumamoto University. The assistant answers the questions of students, based on the context. Context: "
+        # "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal és válaszol a következő context alapján. Context: "
         # "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
         # "Context:\n"
     )
