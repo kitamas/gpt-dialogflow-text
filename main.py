@@ -92,7 +92,8 @@ def webhook():
 embed_model = "text-embedding-ada-002"
 
 # namespace_name = "infmuz"
-namespace_name = "kando"
+# namespace_name = "kando"
+namespace_name = "kumamoto"
 
 def retrieve(query_text):
     index_name = "chat-doc-mt"
