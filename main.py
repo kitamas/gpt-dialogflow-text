@@ -5,6 +5,12 @@ from flask import send_from_directory, request
 import openai
 import pinecone
 
+# namespace = "infmuz"
+namespace = "kando"
+# namespace = "kumamoto"
+
+index_name = "chat-doc-mt"
+
 # Heroku config vars
 openai.api_key = os.getenv("OPENAI_API_KEY")
 # openai.api_key = "sk- . . ."
@@ -18,12 +24,6 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 YOUR_ENV = os.getenv("YOUR_ENV")
 # TELEKOM YOUR_ENV = "us-west1-gcp-free"
 # YOUR_ENV = "us-west4-gcp"
-
-index_name = "chat-doc-mt"
-
-# namespace = "infmuz"
-# namespace = "kando"
-namespace = "kumamoto"
 
 # Flask app should start in global layout
 app = flask.Flask(__name__)
@@ -40,9 +40,9 @@ def home():
     return "Hello World"
 
 def complete(prompt):
-    # messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
     # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
-    messages = [{"role": "system", "content": "Kumamoto University. The assistant answer the questions of students based on the prompt."},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Kumamoto University. The assistant answer the questions of students based on the prompt."},{"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
@@ -92,8 +92,8 @@ def webhook():
 embed_model = "text-embedding-ada-002"
 
 # namespace_name = "infmuz"
-# namespace_name = "kando"
-namespace_name = "kumamoto"
+namespace_name = "kando"
+# namespace_name = "kumamoto"
 
 def retrieve(query_text):
     index_name = "chat-doc-mt"
@@ -128,8 +128,8 @@ def retrieve(query_text):
 
     # build our prompt with the retrieved contexts included
     prompt_start = (
-        "Kumamoto University. The assistant answers the questions of students, based on the context. Context: "
-        # "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal és válaszol a következő context alapján. Context: "
+        # "Kumamoto University. The assistant answers the questions of students, based on the context. Context: "
+        "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal és válaszol a következő context alapján. Context: "
         # "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást és válaszol a látogatóknak a következő context alapján. Context: "
         # "Context:\n"
     )
