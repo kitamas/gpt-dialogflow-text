@@ -40,14 +40,14 @@ def home():
     return "Hello World"
 
 def complete(prompt):
-    messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal."},{"role": "user", "content": prompt}]
-    # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak."},{"role": "user", "content": prompt}]
-    # messages = [{"role": "system", "content": "Kumamoto University. The assistant answer the questions of students based on the prompt."},{"role": "user", "content": prompt}]
+    messages = [{"role": "system", "content": "Kandó Kálmán Villamosmérnöki Kar. Az oktató ismerteti a tananyagot a hallgatókkal. Ha nem tudja a választ, mondja 'Nem tudom.'"},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Informatika Történeti Kiállítás, számítógépmúzeum. A tárlatvezető ismerteti a kiállítást a látogatóknak. Ha nem tudja a választ, mondja 'Nem tudom.'"},{"role": "user", "content": prompt}]
+    # messages = [{"role": "system", "content": "Kumamoto University. The assistant answer the questions of students based on the prompt. If you do not know the answer, say 'I do not know.'"},{"role": "user", "content": prompt}]
 
     res = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     messages = messages,
-    temperature = 0.5,
+    temperature = 0.3,
     max_tokens = 500
     )
 
